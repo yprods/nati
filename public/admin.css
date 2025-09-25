@@ -1,0 +1,233 @@
+/* עיצוב כללי */
+body {
+    font-family: 'Heebo', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #eef1f5;
+    color: #444;
+    direction: rtl;
+    text-align: right;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 30px auto;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* כותרות */
+h1, h2 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 2.5rem;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    transform: translateX(50%);
+    width: 60px;
+    height: 4px;
+    background-color: #3498db;
+    border-radius: 2px;
+}
+
+/* קטע סטטוס חיבור */
+.connection-status-container {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    border: 2px solid #e1e4e8;
+    transition: all 0.3s ease;
+}
+
+.connection-status-container:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+#qrCodeImage {
+    max-width: 200px;
+    height: auto;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: none;
+    margin: 20px auto;
+}
+
+.status-message {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 15px;
+}
+
+.status-message.connected { color: #27ae60; }
+.status-message.disconnected { color: #e74c3c; }
+.status-message.pending { color: #f39c12; }
+
+/* טעינה - Spinner */
+.spinner {
+    border: 5px solid rgba(52, 152, 219, 0.1);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border-top-color: #3498db;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 15px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* טבלת פניות */
+#contactsTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#contactsTable th, #contactsTable td {
+    border: none;
+    padding: 15px;
+    text-align: right;
+    vertical-align: middle;
+}
+
+#contactsTable th {
+    background-color: #34495e;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+#contactsTable tbody tr {
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#contactsTable tbody tr:nth-child(even) { background-color: #fbfdff; }
+#contactsTable tbody tr:nth-child(odd) { background-color: #ffffff; }
+#contactsTable tbody tr:hover {
+    background-color: #ecf0f1;
+    transform: scale(1.01);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+#noContactsMessage {
+    text-align: center;
+    margin-top: 20px;
+    font-style: italic;
+    color: #7f8c8d;
+    padding: 20px;
+    border: 1px dashed #bdc3c7;
+    border-radius: 8px;
+    background-color: #fdfdfd;
+}
+
+/*
+  התאמה למכשירים ניידים
+  -----------------------------
+  זהו החלק הקריטי לעיצוב רספונסיבי.
+  אנו משנים את אופן התצוגה של הטבלה למסכים קטנים,
+  כך שהיא תהפוך מתצוגת עמודות לתצוגת בלוקים.
+*/
+@media (max-width: 768px) {
+    .container {
+        margin: 20px;
+        padding: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* צל קטן יותר בנייד */
+    }
+
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.5rem; }
+
+    .connection-status-container, .contacts-section {
+        padding: 20px; /* ריווח פנימי מותאם */
+    }
+
+    /* הפיכת הטבלה לרספונסיבית */
+    #contactsTable {
+        border-collapse: separate;
+        border-spacing: 0 10px; /* רווח בין שורות הטבלה */
+        box-shadow: none; /* הסרת צל מהטבלה הראשית */
+    }
+
+    #contactsTable thead {
+        display: none; /* הסתרת כותרות הטבלה במסכים קטנים */
+    }
+
+    #contactsTable tr {
+        display: block; /* כל שורה הופכת לבלוק נפרד */
+        margin-bottom: 20px;
+        border: 1px solid #e1e4e8;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+
+    #contactsTable tr:hover {
+        transform: translateY(-3px); /* אפקט ריחוף עדין במעבר עכבר */
+    }
+
+    #contactsTable td {
+        display: block; /* כל תא הופך לבלוק נפרד */
+        text-align: right;
+        padding: 12px 20px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    /* הוספת תוויות לכל שורה */
+    #contactsTable td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #7f8c8d;
+        display: inline-block;
+        margin-left: 10px;
+        min-width: 80px; /* לוודא שהתווית מספיק רחבה */
+    }
+
+    /* הופך את התא האחרון ללא גבול תחתון */
+    #contactsTable td:last-child {
+        border-bottom: none;
+    }
+
+    /* מוחק את התוויות עבור ה-HTML המקורי */
+    #contactsTable td[data-label="מזהה"]:before {
+        content: 'מזהה:';
+    }
+    #contactsTable td[data-label="שם מלא"]:before {
+        content: 'שם מלא:';
+    }
+    #contactsTable td[data-label="כתובת"]:before {
+        content: 'כתובת:';
+    }
+    #contactsTable td[data-label="טלפון"]:before {
+        content: 'טלפון:';
+    }
+    #contactsTable td[data-label="הודעה"]:before {
+        content: 'הודעה:';
+    }
+    #contactsTable td[data-label="תאריך פנייה"]:before {
+        content: 'תאריך פנייה:';
+    }
+}
